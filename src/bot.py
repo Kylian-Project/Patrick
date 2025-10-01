@@ -42,8 +42,9 @@ class DiscordBot(commands.Bot):
         
         # Variables du bot
         self.start_time = None
+        self.owner_id = int(os.getenv('OWNER_ID')) if os.getenv('OWNER_ID') else None
         
-    async def get_prefix(self, bot, message):
+    async def get_prefix(self, message):
         """Récupère le préfixe pour les commandes"""
         if not message.guild:
             return self.config.get('default_prefix', '!')
@@ -56,13 +57,6 @@ class DiscordBot(commands.Bot):
         
         # Charger les cogs (modules de commandes)
         await self.load_cogs()
-        
-        # Synchroniser les commandes slash
-        try:
-            synced = await self.tree.sync()
-            self.logger.info(f"{len(synced)} commandes slash synchronisées")
-        except Exception as e:
-            self.logger.error(f"Erreur lors de la synchronisation des commandes: {e}")
     
     async def load_cogs(self):
         """Charge tous les cogs (modules de commandes)"""

@@ -33,22 +33,9 @@ class General(commands.Cog):
         embed.add_field(name="Latence API", value=f"{api_latency}ms", inline=True)
         
         await message.edit(content="", embed=embed)
-    
-    @app_commands.command(name="ping", description="Teste la latence du bot")
-    async def ping_slash(self, interaction: discord.Interaction):
-        """Version slash command de ping"""
-        api_latency = round(self.bot.latency * 1000)
-        
-        embed = discord.Embed(
-            title="🏓 Pong!",
-            color=0x00ff00
-        )
-        embed.add_field(name="Latence API", value=f"{api_latency}ms", inline=True)
-        
-        await interaction.response.send_message(embed=embed)
-    
+       
     @commands.command(name="info", aliases=["botinfo"])
-    async def bot_info(self, ctx):
+    async def info_command(self, ctx):
         """Informations sur le bot"""
         embed = discord.Embed(
             title="📊 Informations du Bot",
@@ -80,45 +67,11 @@ class General(commands.Cog):
             value=discord.__version__,
             inline=True
         )
-        embed.add_field(
-            name="🔧 Préfixe",
-            value=self.bot.command_prefix,
-            inline=True
-        )
         
         embed.set_footer(text=f"Bot ID: {self.bot.user.id}")
         embed.set_thumbnail(url=self.bot.user.avatar.url if self.bot.user.avatar else None)
         
         await ctx.send(embed=embed)
-    
-    @app_commands.command(name="info", description="Informations sur le bot")
-    async def info_slash(self, interaction: discord.Interaction):
-        """Version slash command d'info"""
-        embed = discord.Embed(
-            title="📊 Informations du Bot",
-            color=0x3498db
-        )
-        
-        embed.add_field(
-            name="👑 Développeur",
-            value=f"<@{self.bot.owner_id}>" if self.bot.owner_id else "Non défini",
-            inline=True
-        )
-        embed.add_field(
-            name="📊 Serveurs",
-            value=len(self.bot.guilds),
-            inline=True
-        )
-        embed.add_field(
-            name="👥 Utilisateurs",
-            value=sum(guild.member_count for guild in self.bot.guilds),
-            inline=True
-        )
-        
-        embed.set_footer(text=f"Bot ID: {self.bot.user.id}")
-        embed.set_thumbnail(url=self.bot.user.avatar.url if self.bot.user.avatar else None)
-        
-        await interaction.response.send_message(embed=embed)
     
     @commands.command(name="help")
     async def help_command(self, ctx, *, command=None):

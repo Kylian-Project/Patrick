@@ -16,7 +16,7 @@ class Moderation(commands.Cog):
     @commands.command(name="clear", aliases=["purge"])
     @commands.has_permissions(manage_messages=True)
     @commands.bot_has_permissions(manage_messages=True)
-    async def clear(self, ctx, amount: int = 5):
+    async def clear(self, ctx, amount: int = 1):
         """Supprime un nombre spécifié de messages"""
         if amount < 1:
             await ctx.send("❌ Le nombre doit être supérieur à 0!")
