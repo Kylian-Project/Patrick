@@ -63,6 +63,7 @@ class DiscordBot(commands.Bot):
         cogs_to_load = [
             'src.commands.general',
             'src.commands.moderation',
+            'src.commands.crous',
             'src.events.on_ready'
         ]
         

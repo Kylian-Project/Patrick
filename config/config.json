@@ -5,9 +5,5 @@
   "log_level": "INFO",
   "features": {
     "moderation": true
-  },
-  "messages": {
-    "welcome_message": "Bienvenue {user} sur le serveur {server}!",
-    "goodbye_message": "{user} a quitté le serveur."
   }
 }
