@@ -1,4 +1,4 @@
-# 🤖 Discord Bot Python
+# 🤖 kirtaP - Le bot Patrick, mais à l'envers !
 
 Un bot Discord moderne et modulaire développé en Python avec discord.py.
 
@@ -11,7 +11,7 @@ Un bot Discord moderne et modulaire développé en Python avec discord.py.
 ### 1. Cloner le projet
 ```bash
 git clone URL
-cd Patrick
+cd kirtaP
 ```
 
 ### 2. Installer les dépendances
