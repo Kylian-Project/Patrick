@@ -115,8 +115,10 @@ async def setup(bot):
 ### Logs
 Les logs sont automatiquement sauvegardés dans le dossier `logs/` avec rotation quotidienne.
 
-## 📝 Licence
+## 🌐 API usage
+Utilisation de [CROUStillantAPI](https://api.croustillant.menu/) pour la récupération des menus CROUS.
 
+## 📝 Licence
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ## 📞 Support
