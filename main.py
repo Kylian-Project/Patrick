@@ -25,8 +25,8 @@ logger = logging.getLogger(__name__)
 async def main():
     """Fonction principale pour lancer le bot"""
     try:
-        if not os.path.exists('.env'):
-            logger.error("Fichier .env non trouvé !")
+        if not os.getenv('DISCORD_TOKEN'):
+            logger.error("DISCORD_TOKEN non trouvé dans les variables d'environnement!")
             return
         
         # Initialiser et démarrer le bot
