@@ -63,7 +63,7 @@ class General(commands.Cog):
         
         embed.add_field(
             name="👑 Développeur",
-            value=f"<@{self.bot.owner_id}>" if self.bot.owner_id else "Non défini",
+            value="Juste un boss",
             inline=True
         )
         embed.add_field(

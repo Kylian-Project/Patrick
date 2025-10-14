@@ -7,7 +7,7 @@ from discord.ext import commands, tasks
 from discord import app_commands
 import aiohttp
 import asyncio
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 import logging
 
 class Crous(commands.Cog):
@@ -244,15 +244,10 @@ class Crous(commands.Cog):
             
             await ctx.send(embed=embed)
     
-    @tasks.loop(hours=24)
+    @tasks.loop(time=time(hour=8, minute=0))
     async def daily_menu_task(self):
-        """Tâche automatique pour poster le menu du jour"""
+        """Tâche automatique pour poster le menu du jour à 8h00"""
         try:
-            # Vérifier si c'est l'heure de poster (8h00)
-            now = datetime.now()
-            if now.hour != 8:
-                return
-            
             channel = self.bot.get_channel(self.channel_id)
             if not channel:
                 self.logger.warning(f"Canal {self.channel_id} introuvable pour le menu automatique")
