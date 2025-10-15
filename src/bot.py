@@ -64,6 +64,7 @@ class DiscordBot(commands.Bot):
             'src.commands.general',
             'src.commands.moderation',
             'src.commands.crous',
+            'src.commands.fun',
             'src.events.on_ready'
         ]
         

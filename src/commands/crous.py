@@ -20,7 +20,7 @@ class Crous(commands.Cog):
         # Configuration CROUS
         self.restaurant_id = 1392
         self.api_url = f"https://api.croustillant.menu/v1/restaurants/{self.restaurant_id}/menu"
-        self.channel_id = 1339627124507672719
+        self.channel_id = 1422877808681554000
         
         # Démarrer la tâche automatique
         self.daily_menu_task.start()
