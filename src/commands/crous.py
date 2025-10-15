@@ -74,19 +74,42 @@ class Crous(commands.Cog):
             
             # Grouper les catégories importantes
             categories_importantes = []
-            autres_categories = []
+            cafeteria = None
             
             for categorie in repas.get('categories', []):
                 libelle = categorie.get('libelle', '')
                 
-                # Filtrer les catégories importantes
-                if any(keyword in libelle.lower() for keyword in ['étudiant', 'barbecue', 'plat du jour']) and 'personnel' not in libelle.lower():
+                # Filtrer les catégories importantes (tout ce qui concerne les étudiants)
+                if 'etudiants' in libelle.lower() and 'personnel' not in libelle.lower():
                     categories_importantes.append(categorie)
                 elif 'cafeteria' in libelle.lower() and 'personnel' not in libelle.lower():
-                    categories_importantes.append(categorie)
+                    cafeteria = categorie
+            
+            # Fonction pour déterminer l'ordre d'affichage
+            def get_order(categorie):
+                libelle = categorie.get('libelle', '').lower()
+                if 'entrees' in libelle or 'entrées' in libelle:
+                    return 1
+                elif 'barbecue' in libelle:
+                    return 2
+                elif 'plat du jour' in libelle:
+                    # Inverser l'ordre des plats du jour (1 avant 2)
+                    if 'plat du jour 1' in libelle:
+                        return 3
+                    elif 'plat du jour 2' in libelle:
+                        return 4
+                    return 3
+                elif 'pates' in libelle or 'pâtes' in libelle:
+                    return 5
+                elif 'desserts' in libelle:
+                    return 6
+                else:
+                    return 99
+            
+            # Trier les catégories dans l'ordre logique
+            categories_importantes.sort(key=get_order)
             
             embed.add_field(name="─" * 30, value="", inline=False)
-            categories_importantes.reverse()
             
             # Afficher les catégories importantes
             for categorie in categories_importantes:
@@ -106,6 +129,21 @@ class Crous(commands.Cog):
                     embed.add_field(
                         name=f"📋 {short_libelle.capitalize()}",
                         value='\n'.join(plats_text)[:1024],  # Limite Discord de 1024 caractères
+                        inline=False
+                    )
+                    embed.add_field(name="─" * 30, value="", inline=False)
+            
+            # Afficher la cafeteria en dernier
+            if cafeteria:
+                plats = cafeteria.get('plats', [])
+                if plats:
+                    plats_text = []
+                    for plat in plats:
+                        plats_text.append(f"• {plat.get('libelle', 'Plat inconnu')}")
+                    
+                    embed.add_field(
+                        name="📋 Cafeteria",
+                        value='\n'.join(plats_text)[:1024],
                         inline=False
                     )
                     embed.add_field(name="─" * 30, value="", inline=False)
